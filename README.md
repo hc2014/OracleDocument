@@ -16,7 +16,7 @@
 #####*NOT:如果是true，则返回false，如果是false则返回true，其他都返回unknown
 #####*TRUE:如果是true，才返回true,有一个false,则返回false,其他都返回unknown
 #####*OR:如果全为false，才返回false，有一个true，则返回true，其他都返回unknown
-**not取反的计算结果**
+**not取反的计算结果**<BR />
 ||TRUE|FALSE|UNKNOWN|
 |:-----|:-----|:-----|-----|
 |NOT|FALSE|TRUE|UNKNOWN|
