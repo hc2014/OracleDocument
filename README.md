@@ -21,3 +21,11 @@
 ||TRUE|FALSE|UNKNOWN|
 |:-----|:-----|:-----|-----|
 |NOT|FALSE|TRUE|UNKNOWN|
+***
+#####and的逻辑与计算结果
+||TRUE|FALSE|UNKNOWN|
+|:-----|:-----|:-----|-----|
+|AND|TRUE|FALSE|UNKNOWN|
+|TRUE|TRUE|FALSE|UNKNOWN|
+|FALSE|FALSE|FALSE|FALSE|
+|UNKNOWN|UNKNOWN|FALSE|UNKNOWN|
