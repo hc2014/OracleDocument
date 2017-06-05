@@ -12,8 +12,8 @@ money number
 
 insert into hc_testA values('a',20);
 insert into hc_testA values('b',20);
-insert into hc_testA values('a',10);
-insert into hc_testA values('c',20);
+insert into hc_testB values('a',10);
+insert into hc_testB values('c',20);
 
 
 select * from hc_testA
@@ -25,7 +25,7 @@ select * from hc_testB
 --a	10
 --c	20
 
---ÆÕÍ¨ÓÃ·¨
+--æ™®é€šç”¨æ³•
 merge into hc_testB tb
 using hc_testA ta
 on(ta.name=tb.name)
@@ -34,7 +34,7 @@ update set tb.money=ta.money+tb.money
 when not matched then
 insert values(ta.name,ta.money)
 
---Ö´ĞĞÒÔºó²éÑ¯B,ÕâÀïÓĞÁ½¸öµØ·½·¢ÉúÁË¸Ä±ä£¬Ò»¸öÊÇĞÂÔöÁËÊı¾İb£¬µÚ¶ş¸öÊÇÊı¾İaÓĞÔ­À´µÄ10 ±ä³ÉÁË30
+--æ‰§è¡Œä»¥åæŸ¥è¯¢B,è¿™é‡Œæœ‰ä¸¤ä¸ªåœ°æ–¹å‘ç”Ÿäº†æ”¹å˜ï¼Œä¸€ä¸ªæ˜¯æ–°å¢äº†æ•°æ®bï¼Œç¬¬äºŒä¸ªæ˜¯æ•°æ®aæœ‰åŸæ¥çš„10 å˜æˆäº†30
 select * from hc_testB
 --name money
 --a	30
@@ -43,7 +43,7 @@ select * from hc_testB
 
 
 
---update¡¢insert ¶şÑ¡Ò»£¬ÇÒ¿ÉÒÔÌí¼ÓÌõ¼ş
+--updateã€insert äºŒé€‰ä¸€ï¼Œä¸”å¯ä»¥æ·»åŠ æ¡ä»¶
 merge into hc_testB tb
 using hc_testA ta
 on (ta.name=tb.name)
@@ -56,18 +56,18 @@ select * from hc_testB
 --b 20
 
 
-/*ÕâÀïĞÂÔöÁËdelete£¬ÖµµÃ×¢ÒâµÄÊÇ×îºóµÄdeleteÓï¾ä£¬ÉúĞ§µÄÇ°Ìá±ØĞëÊÇta.name=tb.name£¬ËùÒÔÈç¹ûdeleteÌõ¼şĞ´³Étb.name=aµÄ»°£¬ÄÇÃ´B±íÖĞµÄaÊı
-¾İ»á±»É¾³ı.µ«ÊÇÈç¹ûĞ´³Étb.name=cµÄ»°£¬ÄÇÃ´B±íÖĞµÄÊı¾İ½«²»»á±»É¾³ı*/
+/*è¿™é‡Œæ–°å¢äº†deleteï¼Œå€¼å¾—æ³¨æ„çš„æ˜¯æœ€åçš„deleteè¯­å¥ï¼Œç”Ÿæ•ˆçš„å‰æå¿…é¡»æ˜¯ta.name=tb.nameï¼Œæ‰€ä»¥å¦‚æœdeleteæ¡ä»¶å†™æˆtb.name=açš„è¯ï¼Œé‚£ä¹ˆBè¡¨ä¸­çš„aæ•°
+æ®ä¼šè¢«åˆ é™¤.ä½†æ˜¯å¦‚æœå†™æˆtb.name=cçš„è¯ï¼Œé‚£ä¹ˆBè¡¨ä¸­çš„æ•°æ®å°†ä¸ä¼šè¢«åˆ é™¤*/
 merge into hc_testB tb
 using hc_testA ta
 on (ta.name=tb.name)
 when matched then
-update set tb.money=ta.money+tb.money--ÔÚÕâÀï¿ÉÒÔÌí¼ÓwhereÓï¾ä£¬À´É¸Ñ¡Êı¾İ.½÷¼Çdelete µÄwhereÓï¾ä±ØĞë·Åµ½×îºó²»È»»á±¨´í
+update set tb.money=ta.money+tb.money--åœ¨è¿™é‡Œå¯ä»¥æ·»åŠ whereè¯­å¥ï¼Œæ¥ç­›é€‰æ•°æ®.è°¨è®°delete çš„whereè¯­å¥å¿…é¡»æ”¾åˆ°æœ€åä¸ç„¶ä¼šæŠ¥é”™
 delete where (tb.name='c')
 select * from hc_testB
 
 
---ÎŞÌõ¼şinsert Èç¹ûonÌõ¼şÊÇÒ»¸öºãµÈ»òÕßºã²»µÈµÄ»°,Ïàµ±ÓÚ°ÑA±íµÄÊı¾İÖ±½ÓÌí¼Óµ½B±íÖĞ£¬À×Í¬ÓÚinsert..select
+--æ— æ¡ä»¶insert å¦‚æœonæ¡ä»¶æ˜¯ä¸€ä¸ªæ’ç­‰æˆ–è€…æ’ä¸ç­‰çš„è¯,ç›¸å½“äºæŠŠAè¡¨çš„æ•°æ®ç›´æ¥æ·»åŠ åˆ°Bè¡¨ä¸­ï¼Œé›·åŒäºinsert..select
 merge into hc_testB tb
 using hc_testA ta
 on (1=2)
@@ -75,11 +75,11 @@ when not matched then
 insert values(ta.name,ta.money)
 
 
-/*mergeÎóÇø,ÕâÀïÔÚA±íÖĞĞÂÔöÒ»¸öa,15µÄÊı¾İ¡£È»ºóÖ´ĞĞµÚÒ»¸ö¸ösqlÓï¾ä¾Í»á±¨´í£ºORA-30926: ÎŞ·¨ÔÚÔ´±íÖĞ»ñµÃÒ»×éÎÈ¶¨µÄĞĞ¡£
-±¨´íµÄÔ­ÒòÊÇA±íÖĞÆ¥ÅäÁË¶àÌõÊı¾İ(ÓĞÁ½¸öa)¡£½â¾ö·½·¨ÓĞÁ½¸ö£¬Ò»¸öÊÇ¸øname×Ö¶Î´´½¨Ö÷¼ü£¬·ÀÖ¹ÖØ¸´¡£Èç¹û¸ÃÊı¾İÒÑ¾­ÓĞÆäËû×Ö¶ÎÊÇÖ÷¼üµÄ»°£¬ÄÇÃ´¾Í
-ÓÃµÚ¶şÖÖ·½·¨£¬Ò²¾ÍÊÇÏÂÃæÕ¹Ê¾µÄ·½·¨¡£¸Ã·½·¨ÊÇ°ÑÍ¬Ãû³ÆµÄÊı¾İ ×÷ÎªÒ»¸ö·Ö×é£¬Õâ¾Í±ä³ÉÁËÒ»ÌõÊı¾İÁË*/
+/*mergeè¯¯åŒº,è¿™é‡Œåœ¨Aè¡¨ä¸­æ–°å¢ä¸€ä¸ªa,15çš„æ•°æ®ã€‚ç„¶åæ‰§è¡Œç¬¬ä¸€ä¸ªä¸ªsqlè¯­å¥å°±ä¼šæŠ¥é”™ï¼šORA-30926: æ— æ³•åœ¨æºè¡¨ä¸­è·å¾—ä¸€ç»„ç¨³å®šçš„è¡Œã€‚
+æŠ¥é”™çš„åŸå› æ˜¯Aè¡¨ä¸­åŒ¹é…äº†å¤šæ¡æ•°æ®(æœ‰ä¸¤ä¸ªa)ã€‚è§£å†³æ–¹æ³•æœ‰ä¸¤ä¸ªï¼Œä¸€ä¸ªæ˜¯ç»™nameå­—æ®µåˆ›å»ºä¸»é”®ï¼Œé˜²æ­¢é‡å¤ã€‚å¦‚æœè¯¥æ•°æ®å·²ç»æœ‰å…¶ä»–å­—æ®µæ˜¯ä¸»é”®çš„è¯ï¼Œé‚£ä¹ˆå°±
+ç”¨ç¬¬äºŒç§æ–¹æ³•ï¼Œä¹Ÿå°±æ˜¯ä¸‹é¢å±•ç¤ºçš„æ–¹æ³•ã€‚è¯¥æ–¹æ³•æ˜¯æŠŠåŒåç§°çš„æ•°æ® ä½œä¸ºä¸€ä¸ªåˆ†ç»„ï¼Œè¿™å°±å˜æˆäº†ä¸€æ¡æ•°æ®äº†*/
 insert into hc_testA values('a',15)
---ÎóÇø½â¾ö·½·¨
+--è¯¯åŒºè§£å†³æ–¹æ³•
 merge into hc_testB tb
 using(select name,sum(money) money from hc_testA group by name) ta
 on(ta.name=tb.name)
@@ -87,7 +87,7 @@ when matched then
 update set tb.money=ta.money+tb.money
 
 
---×Ô±í¸üĞÂ
+--è‡ªè¡¨æ›´æ–°
 merge into hc_testB tb
 using (select * from hc_testB where name='d') ta
 on(ta.name=tb.name)
@@ -96,8 +96,8 @@ update set tb.money=100
 when not matched then
 insert values('d',100)
 
---´ËÓï¾äÔ­ÒâÊÇÈç¹ûB±íÖĞ´æÔÚdÊı¾İµÄ»°ÄÇÃ´¾ÍĞŞ¸ÄÆämoneyÎª100,Èç¹ûÃ»ÓĞ¾Í²åÈëÊı¾İ,µ«ÊÇÖ´ĞĞ¹ıÒÔºó·¢ÏÖB±íÃ»ÓĞ·¢ÉúÈÎºÎµÄ±ä»¯,Ô­ÒòÊÇuningºóÃæµÄ
---±ØĞë°üº¬Òª¸üĞÂ»òÕß²åÈëµÄĞĞ£¬¶øB±íÖĞ¸ù±¾¾Í²»´æÔÚname=dµÄÊı¾İ£¬¿ÉÒÔ¸Ä³É:
+--æ­¤è¯­å¥åŸæ„æ˜¯å¦‚æœBè¡¨ä¸­å­˜åœ¨dæ•°æ®çš„è¯é‚£ä¹ˆå°±ä¿®æ”¹å…¶moneyä¸º100,å¦‚æœæ²¡æœ‰å°±æ’å…¥æ•°æ®,ä½†æ˜¯æ‰§è¡Œè¿‡ä»¥åå‘ç°Bè¡¨æ²¡æœ‰å‘ç”Ÿä»»ä½•çš„å˜åŒ–,åŸå› æ˜¯uningåé¢çš„
+--å¿…é¡»åŒ…å«è¦æ›´æ–°æˆ–è€…æ’å…¥çš„è¡Œï¼Œè€ŒBè¡¨ä¸­æ ¹æœ¬å°±ä¸å­˜åœ¨name=dçš„æ•°æ®ï¼Œå¯ä»¥æ”¹æˆ:
 merge into hc_testB tb
 using (select count(0) cnt from hc_testB where name='d') ta
 on(cnt<>0)
@@ -107,8 +107,8 @@ when not matched then
 insert values('d',100)
 
 
---ÕæÊµ°¸ÀıÒ»
---ÈçºÎ½«hc_testC±íÖĞid=1µÄnameÖµ¸Ä³Éid=2µÄnameÖµ£¬½«id=2µÄnameÖµ¸Ä³Éid=1µÄnameÖµ
+--çœŸå®æ¡ˆä¾‹ä¸€
+--å¦‚ä½•å°†hc_testCè¡¨ä¸­id=1çš„nameå€¼æ”¹æˆid=2çš„nameå€¼ï¼Œå°†id=2çš„nameå€¼æ”¹æˆid=1çš„nameå€¼
 create table hc_testC
 (
 id number,
@@ -118,14 +118,14 @@ name nvarchar2(20)
 insert into hc_testC values(1,'a');
 insert into hc_testC values(2,'b');
 
---Èç¹û°²×°³£¹æµÄ·½·¨
+--å¦‚æœå®‰è£…å¸¸è§„çš„æ–¹æ³•
 update hc_testC set name=(select name from hc_testC where id=2) where id=1;
---ÄÇÃ´´ËÊ±id=1µÄnameµÄÖµÒÑ¾­±»ĞŞ¸ÄÁË£¬ÓÖ¸ÃÈçºÎÈ¥Âú×ãĞŞ¸Äid=2µÄÖµĞŞ¸Ä³Éid=1µÄnameµÄÖµÄØ£¿
---ËùÒÔ¿ÉÒÔÓÃĞéÄâ±íºÍmergeÀ´ÊµÏÖ
+--é‚£ä¹ˆæ­¤æ—¶id=1çš„nameçš„å€¼å·²ç»è¢«ä¿®æ”¹äº†ï¼Œåˆè¯¥å¦‚ä½•å»æ»¡è¶³ä¿®æ”¹id=2çš„å€¼ä¿®æ”¹æˆid=1çš„nameçš„å€¼å‘¢ï¼Ÿ
+--æ‰€ä»¥å¯ä»¥ç”¨è™šæ‹Ÿè¡¨å’Œmergeæ¥å®ç°
 merge into hc_testC tc
 using(select 1 id,(select name from hc_testC where id=2) name from dual
       union all
-      select 2,(select name from hc_testC where id=1) name from dual) t--´Ë·½·¨ĞéÄâ±íÊÇ¹Ø¼üËùÔÚ
+      select 2,(select name from hc_testC where id=1) name from dual) t--æ­¤æ–¹æ³•è™šæ‹Ÿè¡¨æ˜¯å…³é”®æ‰€åœ¨
 on(tc.id=t.id)
 when matched then
 update set tc.name=t.name
