@@ -37,3 +37,20 @@
 |TRUE|TRUE|TRUE|TRUE|
 |FALSE|TRUE|FALSE|UNKNOWN|
 |UNKNOWN|TRUE|UNKNOWN|UNKNOWN|
+
+
+ ### COALESCE
+ COALESCE返回参数列表中第一个非空表达式。必须指定最少两个参数。如果所有的参数都是null，则返回null。Oracle使用短路运算，它依次对每个表达式求值判断它是否为空，而不是对所有表达式都求值后在判断第一个非空值。
+ 
+ 
+ 下面的例子给所有的产品按list_price打9折，如果没有list_price，就按最低价MIN_PRICE算。 如果也没有MIN_PRICE，那么sale就是5. 
+  ```
+ SELECT product_id, list_price, min_price,
+       COALESCE(0.9*list_price, min_price, 5) "Sale"
+  FROM product_information
+  WHERE supplier_id = 102050
+  ORDER BY product_id;
+  ```
+ 
+ 
+ 
